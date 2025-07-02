@@ -36,6 +36,7 @@ func main(){
 		err := json.NewDecoder(r.Body).Decode(&reg)
 		if err !=nil{
 			fmt.Println("error in json")
+			fmt.Fprint(w,"error in json")
 			return
 		}
 		query:=`INSERT INTO users VALUES($1,$2,$3)`
@@ -45,6 +46,7 @@ func main(){
 				return
 			}
 			fmt.Println("Register Successfuly")
+			fmt.Fprintf(w,"Register Successfuly")
 	})
 
 
@@ -53,6 +55,7 @@ func main(){
 		err:=json.NewDecoder(r.Body).Decode(&log)
 		if err !=nil{
 		fmt.Println("Error in login json")
+		fmt.Fprint(w,"error in login json")
 		return
 	}
 
@@ -63,6 +66,7 @@ func main(){
 		return
 		}
 		fmt.Println("Login Successfuly")
+		fmt.Fprintf(w,"Login Successfuly ")
 })
 
 	http.ListenAndServe(":8000",nil)
